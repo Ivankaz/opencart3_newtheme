@@ -1,0 +1,129 @@
+{% if (last_status or best_status or spec_status) %} 
+  <section class="products">
+    <div class="inner-wrapper">
+      <div class="heading products__heading">
+        {% if (last_status) %} 
+          <span data-tab="last" class="heading__tab-name heading__tab-name_active">{{ heading_last }}</span>
+        {% endif %}
+        {% if (best_status) %} 
+          <span data-tab="best" class="heading__tab-name {% if (last_status==false) %}heading__tab-name_active{% endif %}">{{ heading_best }}</span>
+        {% endif %}
+        {% if (spec_status) %} 
+          <span data-tab="spec" class="heading__tab-name {% if ((last_status==false) and (best_status==false)) %}heading__tab-name_active{% endif %}">{{ heading_spec }}</span>
+        {% endif %}
+        <span class="heading__line"></span>
+        <div class="heading__points">
+          <span class="heading__points__point heading__points__point_active"></span>
+          <span class="heading__points__point"></span>
+          <span class="heading__points__point"></span>
+        </div>
+      </div>
+
+      {% if (last_status) %} 
+        <div id="last" class="tab tab_active owl-carousel__wrapper products__carousel">
+          <div>
+            <span class="owl-carousel-button-prev products__carousel__arrow products__carousel__arrow_left"></span>
+          </div>
+
+          <div class="owl-carousel products__carousel__cards">
+            {% for product in products_last %} 
+              <div id="product-card-{{ product.product_id }}" class="carousel-item products__carousel__cards__card">
+                <img class="products__carousel__cards__card__image product_{{ product['product_id'] }}" src="{{ product['thumb'] }}" alt="{{ product['name'] }}">
+                <a href="{{ product['href'] }}" class="products__carousel__cards__card__title">{{ product['name'] }}</a>
+                <span class="products__carousel__cards__card__note">Код товара: {{ product['sku'] }}</span>
+                <div class="products__carousel__cards__card__row">
+                  <span class="products__carousel__cards__card__price">{{ product['price'] }}</span>
+                  <span class="products__carousel__cards__card__favourites-button {{ product['wishlist_class'] }}" onclick="wishlist.add('{{ product['product_id'] }}', this);" title="{{ product['button_wishlist'] }}"></span>
+                </div>
+                <div class="products__carousel__cards__card__row">
+                  <span class="products__carousel__cards__card__quantity">
+                    <span class="products__carousel__cards__card__quantity__button products__carousel__cards__card__quantity__button_minus">-</span>
+                    <input name="quantity" class="products__carousel__cards__card__quantity__input" type="number" size="1" value="{{ product['minimum'] }}" min="{{ product['minimum'] }}" step="{{ product['minimum'] }}" placeholder="0">
+                    <span class="products__carousel__cards__card__quantity__button products__carousel__cards__card__quantity__button_plus">+</span>
+                  </span>
+                  <span class="products__carousel__cards__card__availability {% if product['stock_status'] == 'В наличии' %}products__carousel__cards__card__availability_in-stock{% endif %}">{{ product['stock_status'] }}</span>
+                </div>
+                <a class="button button_small button_buy products__carousel__cards__card__button" onclick="cart.add('{{ product.product_id }}', '{{ product.minimum }}');" href="##">В корзину</a>
+              </div>
+            {% endfor %}
+          </div>
+
+          <div>
+            <span class="owl-carousel-button-next news__carousel__arrow news__carousel__arrow_right"></span>
+          </div>
+        </div>
+      {% endif %}
+      
+      {% if (best_status) %} 
+        <div id="best" class="tab {% if (last_status==false) %}tab_active{% endif %} owl-carousel__wrapper products__carousel">
+          <div>
+            <span class="owl-carousel-button-prev products__carousel__arrow products__carousel__arrow_left"></span>
+          </div>
+
+          <div class="owl-carousel products__carousel__cards">
+            {% for product in products_best %} 
+              <div id="product-card-{{ product.product_id }}" class="carousel-item products__carousel__cards__card">
+                <img class="products__carousel__cards__card__image product_{{ product['product_id'] }}" src="{{ product['thumb'] }}" alt="{{ product['name'] }}">
+                <a href="{{ product['href'] }}" class="products__carousel__cards__card__title">{{ product['name'] }}</a>
+                <span class="products__carousel__cards__card__note">Код товара: {{ product['sku'] }}</span>
+                <div class="products__carousel__cards__card__row">
+                  <span class="products__carousel__cards__card__price">{{ product['price'] }}</span>
+                  <span class="products__carousel__cards__card__favourites-button {{ product['wishlist_class'] }}" onclick="wishlist.add('{{ product['product_id'] }}', this);" title="{{ product['button_wishlist'] }}"></span>
+                </div>
+                <div class="products__carousel__cards__card__row">
+                  <span class="products__carousel__cards__card__quantity">
+                    <span class="products__carousel__cards__card__quantity__button products__carousel__cards__card__quantity__button_minus">-</span>
+                    <input name="quantity" class="products__carousel__cards__card__quantity__input" type="number" size="1" value="{{ product['minimum'] }}" min="{{ product['minimum'] }}" step="{{ product['minimum'] }}" placeholder="0">
+                    <span class="products__carousel__cards__card__quantity__button products__carousel__cards__card__quantity__button_plus">+</span>
+                  </span>
+                  <span class="products__carousel__cards__card__availability {% if product['stock_status'] == 'В наличии' %}products__carousel__cards__card__availability_in-stock{% endif %}">{{ product['stock_status'] }}</span>
+                </div>
+                <a class="button button_small button_buy products__carousel__cards__card__button" onclick="cart.add('{{ product.product_id }}', '{{ product.minimum }}');" href="##">В корзину</a>
+              </div>
+            {% endfor %}
+          </div>
+
+          <div>
+            <span class="owl-carousel-button-next news__carousel__arrow news__carousel__arrow_right"></span>
+          </div>
+        </div>
+      {% endif %}
+
+      {% if (spec_status) %} 
+        <div id="spec" class="tab {% if ((last_status==false) and (best_status==false)) %}tab_active{% endif %} owl-carousel__wrapper products__carousel">
+          <div>
+            <span class="owl-carousel-button-prev products__carousel__arrow products__carousel__arrow_left"></span>
+          </div>
+
+          <div class="owl-carousel products__carousel__cards">
+            {% for product in products_spec %} 
+              <div id="product-card-{{ product.product_id }}" class="carousel-item products__carousel__cards__card">
+                <img class="products__carousel__cards__card__image product_{{ product['product_id'] }}" src="{{ product['thumb'] }}" alt="{{ product['name'] }}">
+                <a href="{{ product['href'] }}" class="products__carousel__cards__card__title">{{ product['name'] }}</a>
+                <span class="products__carousel__cards__card__note">Код товара: {{ product['sku'] }}</span>
+                <div class="products__carousel__cards__card__row">
+                  <span class="products__carousel__cards__card__price">{{ product['price'] }}</span>
+                  <span class="products__carousel__cards__card__favourites-button {{ product['wishlist_class'] }}" onclick="wishlist.add('{{ product['product_id'] }}', this);" title="{{ product['button_wishlist'] }}"></span>
+                </div>
+                <div class="products__carousel__cards__card__row">
+                  <span class="products__carousel__cards__card__quantity">
+                    <span class="products__carousel__cards__card__quantity__button products__carousel__cards__card__quantity__button_minus">-</span>
+                    <input name="quantity" class="products__carousel__cards__card__quantity__input" type="number" size="1" value="{{ product['minimum'] }}" min="{{ product['minimum'] }}" step="{{ product['minimum'] }}" placeholder="0">
+                    <span class="products__carousel__cards__card__quantity__button products__carousel__cards__card__quantity__button_plus">+</span>
+                  </span>
+                  <span class="products__carousel__cards__card__availability {% if product['stock_status'] == 'В наличии' %}products__carousel__cards__card__availability_in-stock{% endif %}">{{ product['stock_status'] }}</span>
+                </div>
+                <a class="button button_small button_buy products__carousel__cards__card__button" onclick="cart.add('{{ product.product_id }}', this.parentElement.getElementsByTagName('input').quantity.value" href="##">В корзину</a>
+              </div>
+            {% endfor %}
+          </div>
+
+          <div>
+            <span class="owl-carousel-button-next news__carousel__arrow news__carousel__arrow_right"></span>
+          </div>
+        </div>
+      {% endif %}
+
+    </div>
+  </section>
+{% endif %}

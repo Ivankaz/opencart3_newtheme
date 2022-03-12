@@ -1,0 +1,11 @@
+<div id="cart_mobi" class="btn-group show-on-hover w100 {{ mini_header_cart_class }}">
+	{% if (setting_header_cart['type'] == 'redirect') %} 
+		<button class="cart" onclick="get_revpopup_cart('', 'redirect_cart', '');">
+			<span id="cart-total_mobi">{{ text_items }}</span>
+		</button>
+	{% else %} 
+		<button class="cart" onclick="get_revpopup_cart('', 'show_cart', '');">
+			<span id="cart-total_mobi">{{ text_items }}</span>
+		</button>
+	{% endif %} 
+</div>

@@ -1,0 +1,19 @@
+{% if (blocks) %} 
+  <section class="advantages">
+    <div class="inner-wrapper">
+      {% for block in blocks %} 
+      <div class="advantages__advantage">
+        <img class="advantages__advantage__icon" src="{{ block['imageUrl'] }}" alt="{{ block['title'] }}">
+        <div class="advantages__advantage__text">
+          {% if (block['title']) %}
+          <b class="advantages__advantage__title">{{ block['title'] }}</b>
+          {% endif %}
+          {% if (block['title']) %}
+          <span class="advantages__advantage__note">{{ block['description'] }}</span>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+    </div>
+  </section>
+{% endif %}

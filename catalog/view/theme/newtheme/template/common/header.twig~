@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html dir="{{ direction }}" lang="{{ lang }}">
+  <head>
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="HandheldFriendly" content="true">
+    <title>{{ title }}</title>
+    <base href="{{ base }}" />
+    {% if (description) %} 
+    <meta name="description" content="{{ description }}" />
+    {% endif %} 
+    {% if (keywords) %} 
+    <meta name="keywords" content= "{{ keywords }}" />
+    {% endif %} 
+    <meta property="og:title" content="{{ title }}" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="{{ og_url }}" />
+    <meta property="og:image" content="{{ og_image is not empty ? og_image : logo }}" />
+    <meta property="og:site_name" content="{{ name }}" />
+
+    <link rel="stylesheet" type="text/css" href="catalog/view/theme/newtheme/js/OwlCarousel2/assets/owl.carousel.min.css">
+    <link rel="stylesheet" type="text/css" href="catalog/view/theme/newtheme/js/OwlCarousel2/assets/owl.theme.default.min.css">
+    <link rel="stylesheet" type="text/css" href="catalog/view/theme/newtheme/stylesheet/stylesheet.css">
+    {% for style in styles %} 
+    <link href="{{ style['href'] }}" type="text/css" rel="{{ style['rel'] }}" media="{{ style['media'] }}" />
+    {% endfor %} 
+    {% for link in links %} 
+    <link href="{{ link['href'] }}" rel="{{ link['rel'] }}" />
+    {% endfor %} 
+    {% for script in scripts %} 
+      <script src="{{ script }}"></script>
+    {% endfor %} 
+    <script><!--
+      function max_height_div(div){var maxheight = 0;$(div).each(function(){$(this).removeAttr('style');if($(this).height() > maxheight){maxheight = $(this).height();{{ '}}' }});$(div).height(maxheight);}
+              //--></script>
+    {% for analytic in analytics %} 
+      {{ analytic }} 
+    {% endfor %} 
+  </head>
+  <body>
+
+    <!-- Меню -->
+    <section class="menu">
+      <div class="inner-wrapper">
+        <!-- Логотип -->
+        <a href="/" class="menu__logo">ideal-textil.ru</a>
+        {% if (revtheme_header_links) %} 
+        <!-- Верхнее меню -->
+        <nav class="menu__navigation">
+          <ul>
+            {% for revtheme_header_link in revtheme_header_links %} 
+            <li class="menu__navigation__link {% if (currentUrl == revtheme_header_link['link']) %} menu__navigation__link_active {% endif %}"><a href="{{ revtheme_header_link['link'] }}">{{ revtheme_header_link['title'] }}</a></li>
+            {% endfor %} 
+          </ul>
+        </nav>
+        {% endif %} 
+        <!-- Заказ обратного звонка -->
+        <div class="menu__order-callback">
+          <div class="menu__order-callback__left">
+            <a href="tel:+78003334052" class="menu__order-callback__icon"></a>
+          </div>
+          <div class="menu__order-callback__right">
+            {% if (header_phone_number) %} 
+            <a href="tel:{{ header_phone_cod is defined ? header_phone_cod|replace({' ': '', '-': ''}) : '' }}{{ header_phone_number|replace({' ': '', '-': ''}) }}" class="menu__order-callback__phone">{% if (header_phone_cod) %}{{ header_phone_cod }}{% endif %} {{ header_phone_number }}</a>
+            {% endif %}
+            <a href="#order-callback-form" class="menu__order-callback__link">Заказать обратный звонок</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Шапка -->
+    <header class="header">
+      <div class="inner-wrapper">
+        <!-- Меню с категориями -->
+        <nav class="header__navigation">
+          <ul>
+            <li class="header__navigation__button">
+              <a href="##">КАТАЛОГ ТОВАРОВ</a>
+              <ul class="header__navigation__list">
+                {% if (revtheme_dop_menus_3) %} 
+                <div class="header__navigation__list__only-mobile">
+                  {% for revtheme_dop_menu in revtheme_dop_menus_3 %} 
+                  <li class="header__navigation__list__link">
+                    <a href="{{ revtheme_dop_menu['href'~config_language_id] }}" rel="nofollow">{{ revtheme_dop_menu['name'~config_language_id] }}</a>
+                  </li>
+                  {% endfor %}
+                </div>
+                {% endif %}
+
+                {% if (revtheme_dop_menus) %} 
+                {% for revtheme_dop_menu in revtheme_dop_menus %} 
+                <li class="header__navigation__list__link">
+                  <a href="{% if revtheme_dop_menu['href'~config_language_id] %}{{ revtheme_dop_menu['href'~config_language_id] }}{% else %}##{% endif %}" rel="nofollow">
+                    {% if (revtheme_dop_menu['icontype'] == 'iconka' and revtheme_dop_menu['dop_menu_iconka'] is defined) %} <span class="am_category_image"><i class="{{ revtheme_dop_menu['dop_menu_iconka'] }}"></i></span> {% else %} {% if (revtheme_dop_menu['dop_menu_image']) %} <span class="am_category_image"><img src="{{ revtheme_dop_menu['dop_menu_image'] }}" alt=""></span> {% endif %} {% endif %} {{ revtheme_dop_menu['name'~config_language_id] }}
+                  </a>
+                  {% if (revtheme_dop_menu['children'] is defined) %} 
+                  <span class="header__navigation__list__link__arrow"></span>
+                  <ul class="header__navigation__list">
+                    {% for child in revtheme_dop_menu['children'] %} 
+                    <li class="header__navigation__list__link">
+                      <a href="{% if revtheme_dop_menu['href'~config_language_id] != '' %}{{ child['href'~config_language_id] }}{% else %}##{% endif %}" rel="nofollow">{{ child['name'~config_language_id] }}</a>
+                      {% if (tri_level and child['children'] is defined) %}
+                      <span class="header__navigation__list__link__arrow"></span>
+                      <ul class="header__navigation__list">
+                        {% for child in child['children'] %}
+                        <li class="header__navigation__list__link">
+                          <a href="{{ child['href'~config_language_id] }}" rel="nofollow">{{ child['name'~config_language_id] }}</a>
+                        </li>
+                        {% endfor %}
+                      </ul>
+                      {% endif %}
+                    </li>
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
+                </li>
+                {% endfor %}
+                {% endif %}
+
+                {% if (cats_status) %} 
+                {% for category in categories %} 
+                <li class="header__navigation__list__link">
+                  <a href="{{ category['href'] }}" rel="nofollow">
+                    {{ category['name'] }}
+                  </a>
+                  {% if (category['children']) %} 
+                  <span class="header__navigation__list__link__arrow"></span>
+                  <ul class="header__navigation__list">
+                    {% for child in category['children'] %} 
+                    <li class="header__navigation__list__link">
+                      <a href="{{ child['href'] }}" rel="nofollow">{{ child['name'] }}</a>
+                      {% if (tri_level and child['children']) %}
+                      <span class="header__navigation__list__link__arrow"></span>
+                      <ul class="header__navigation__list">
+                        {% for child in child['children'] %}
+                        <li class="header__navigation__list__link">
+                          <a href="{{ child['href'] }}" rel="nofollow">{{ child['name'] }}</a>
+                        </li>
+                        {% endfor %}
+                      </ul>
+                      {% endif %}
+                    </li>
+                    {% endfor %}
+                  </ul>
+                  {% endif %}
+                </li>
+                {% endfor %}
+                {% endif %}
+
+
+              </ul>
+            </li>
+          </ul>
+        </nav>
+        <!-- Основные категории -->
+        {% if (revtheme_dop_menus_3) %} 
+        <nav class="header__main-links">
+          <ul>
+            {% for revtheme_dop_menu in revtheme_dop_menus_3 %} 
+            <li class="header__main-links__link"><a href="{{ revtheme_dop_menu['href'~config_language_id] }}" rel="nofollow">{{ revtheme_dop_menu['name'~config_language_id] }}</a></li>
+            {% endfor %}
+            <ul>
+        </nav>
+        {% endif %}
+        <!-- Поле поиска -->
+        <input id="searchInput" type="text" name="search" class="header__search-input" placeholder="Поиск"></input>
+        <!-- Иконки -->
+        <div class="header__icons">
+          <a id="searchButton" href="##" class="header__icons__icon header__icons__icon_search" title="Поиск">Поиск</a>
+          <a href="{{ account }}" title="{{ text_revlogged }}" class="header__icons__icon header__icons__icon_account" title="Мой аккаунт">{{ text_revlogged }}</a>
+          <a href="{{ wishlist }}" class="header__icons__icon header__icons__icon_favourites" title="{{ text_wishlist }}">{{ text_wishlist }}</a>
+          {{ cart }}
+        </div>
+    </header>

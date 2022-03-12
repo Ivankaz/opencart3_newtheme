@@ -1,0 +1,98 @@
+<a href="/cart" class="header__icons__icon header__icons__icon_cart" title="Корзина">
+    <div id="cart" class="header__cart {{ mini_header_cart_class }}">
+        {% if (setting_header_cart['type'] == 'standart') %} 
+            {% if (is_desctope) %} 
+            <span id="cart-total" class="header__cart__row">{{ text_items }}</span>
+            {% endif %} 
+        {% elseif (setting_header_cart['type'] == 'redirect') %} 
+            <button class="cart" onclick="get_revpopup_cart('', 'redirect_cart', '');">
+                <span id="cart-total">{{ text_items }}</span>
+            </button>
+        {% else %} 
+            <button class="cart" onclick="get_revpopup_cart('', 'show_cart', '');">
+                <span id="cart-total">{{ text_items }}</span>
+            </button>
+        {% endif %} 
+        {% if (setting_header_cart['type'] == 'standart' and is_desctope) %} 
+            <ul class="header__cart__row">
+            {% if (products or vouchers) %} 
+                <li>
+                    <table class="table display-products-cart porder">
+                        {% for product in products %} 
+                            <tr>
+                                <td class="image">
+                                    {% if (product['thumb']) %} 
+                                        <a href="{{ product['href'] }}"><img src="{{ product['thumb'] }}" alt="{{ product['name'] }}" title="{{ product['name'] }}" /></a>
+                                    {% endif %}
+                                </td>
+                                <td class="name">
+                                    <a href="{{ product['href'] }}">{{ product['name'] }}</a>
+                                    {% if (product['option']) %} 
+                                        {% for option in product['option'] %} 
+                                            <br/>
+                                            - <small>{{ option['name'] }} {{ option['value'] }}</small>
+                                        {% endfor %} 
+                                    {% endif %} 
+                                    {% if (product['recurring']) %} 
+                                        <br/>
+                                        - <small>{{ text_recurring }} {{ product['recurring'] }}</small>
+                                    {% endif %}
+                                </td>
+                                <td class="qt">
+                                    <div class="number">
+                                        <div class="frame-change-count">
+                                            <div class="btn-plus">
+                                                <button type="button" onclick="validate_pole_cart(this,{{ product['cart_id'] }},'+',{{ product['minimum'] }},{{ product['quantity_pr'] }});">+</button>
+                                            </div>
+                                            <div class="btn-minus">
+                                                <button type="button" onclick="validate_pole_cart(this,{{ product['cart_id'] }},'-',{{ product['minimum'] }},{{ product['quantity_pr'] }});">-</button>
+                                            </div>
+                                        </div>
+                                        <input type="text" name="quantity[{{ product['cart_id'] }}]" value="{{ product['quantity'] }}" onchange="update_cart_manual(this, '{{ product['cart_id'] }}', '{{ product['minimum'] }}', '{{ product['quantity_pr'] }}');" onkeyup="update_cart_manual(this, '{{ product['cart_id'] }}', '{{ product['minimum'] }}', '{{ product['quantity_pr'] }}');" size="1" class="plus-minus cartid_{{ product['cart_id'] }}" />
+                                    </div>
+                                </td>
+                                <td class="totals">{{ product['total'] }}</td>
+                                <td class="remove">
+                                    <button type="button" onclick="cart.remove('{{ product['cart_id'] }}', '{{ product['product_id'] }}');" title="{{ button_remove }}"><i class="fa fa-trash-o"></i></button>
+                                </td>
+                            </tr>
+                        {% endfor %} 
+                        {% for voucher in vouchers %} 
+                            <tr>
+                                <td class="text-center"></td>
+                                <td class="text-left">{{ voucher['description'] }}</td>
+                                <td class="text-right">x&nbsp;1</td>
+                                <td class="text-right">{{ voucher['amount'] }}</td>
+                                <td class="text-center remove"><button type="button" onclick="voucher.remove('{{ voucher['key'] }}');" title="{{ button_remove }}"><i class="fa fa-trash-o"></i></button></td>
+                            </tr>
+                        {% endfor %} 
+                    </table>
+                </li>
+                <li>
+                    <div class="all-total">
+                        {% for total in totals %} 
+                            <div class="clear-total">
+                                <div class="totals-right">{{ total['text'] }}</div>
+                                <div class="totals-left">{{ total['title'] }}:</div>     
+                            </div>
+                        {% endfor %} 
+                    </div>
+                    <div class="cartfooter">
+                        {% if (setting_header_cart['cart_carturl']) %} 
+                            <a class="btn btn-default btn-sm" href="{{ cart }}">{{ text_cart }}</a>
+                        {% endif %} 
+                        {% if (setting_header_cart['cart_quick']) %} 
+                            <a class="btn btn-default btn-sm" href="javascript:void(0)" onclick="get_revpopup_cartquick();">{{ text_rev_buy_quick }}</a>
+                        {% endif %} 
+                        <a class="btn btn-danger" href="{{ checkout }}">{{ text_checkout }}</a>
+                    </div>
+                </li>
+            {% else %} 
+                <li>
+                    <p class="text-center">{{ text_empty }}</p>
+                </li>
+            {% endif %} 
+        </ul>
+    {% endif %} 
+    </div>
+</a>

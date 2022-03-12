@@ -1,0 +1,50 @@
+<section class="reviews">
+  <div class="inner-wrapper">
+    <div class="heading reviews__heading">
+      {% if (button_all) %}
+        <a href="{{ keyword }}" class="heading__tab-name">{{ heading_title }}</a>
+      {% else %}
+        <span class="heading__tab-name">{{ heading_title }}</span>
+      {% endif %}
+      <span class="heading__line"></span>
+      <div class="heading__points">
+        <span class="heading__points__point heading__points__point_active"></span>
+        <span class="heading__points__point"></span>
+        <span class="heading__points__point"></span>
+      </div>
+    </div>
+
+    <div class="tab tab_active owl-carousel__wrapper reviews__carousel">
+      <div>
+          <span class="owl-carousel-button-prev reviews__carousel__arrow reviews__carousel__arrow_left"></span>
+      </div>
+      <div class="owl-carousel reviews__carousel__cards">
+
+
+        {% for review in reviews %} 
+          <div class="reviews__carousel__cards__card">
+            <div class="reviews__carousel__cards__card__row">
+              <span class="reviews__carousel__cards__card__title">{{ review['author'] }}</span>
+              <span class="reviews__carousel__cards__card__date">{{ review['date_added'] }}</span>
+            </div>
+            <span class="reviews__carousel__cards__card__note">{{ review['text'] }}</span>
+            <div class="reviews__carousel__cards__card__stars">
+              {% set i = 1 %}
+              {% for i in i..5 %} 
+                {% if (review['rating'] < i) %} 
+                  <span class="reviews__carousel__cards__card__stars__star"></span>
+                {% else %}
+                  <span class="reviews__carousel__cards__card__stars__star reviews__carousel__cards__card__stars__star_filled"></span>
+                {% endif %}
+              {% endfor %}
+            </div>
+          </div>
+        {% endfor %}
+
+      </div>
+      <div>
+          <span class="owl-carousel-button-next reviews__carousel__arrow reviews__carousel__arrow_right"></span>
+      </div>
+    </div>
+  </div>
+</section>

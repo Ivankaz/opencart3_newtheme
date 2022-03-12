@@ -1,0 +1,48 @@
+<section class="news">
+  <div class="inner-wrapper">
+    <div class="heading news__heading">
+      {% if (url_all) %}
+        <a href="{{ url_all }}" class="heading__tab-name">{{ heading_title }}</a>
+      {% else %}
+        <span class="heading__tab-name">{{ heading_title }}</span>
+      {% endif %}
+      <span class="heading__line"></span>
+      <div class="heading__points">
+        <span class="heading__points__point heading__points__point_active"></span>
+        <span class="heading__points__point"></span>
+        <span class="heading__points__point"></span>
+      </div>
+    </div>
+
+    <div class="tab tab_active owl-carousel__wrapper news__carousel">
+      <div>
+          <span class="owl-carousel-button-prev news__carousel__arrow news__carousel__arrow_left"></span>
+      </div>
+      <div class="owl-carousel news__carousel__cards">
+
+        {% for blog in blogs %} 
+          <div class="news__carousel__cards__card">
+            {% if (image_status) %} 
+              <a href="{{ blog['href'] }}">
+                <img class="news__carousel__cards__card__image" src="{{ blog['thumb'] }}" alt="{{ blog['title'] }}">
+              </a>
+	    {% endif %} 
+            <div class="news__carousel__cards__card__row">
+              <a href="{{ blog['href'] }}" class="news__carousel__cards__card__title">{{ blog['title'] }}</a>
+              {% if (blog_date_status is defined and blog_date_status) %} 
+                <span class="news__carousel__cards__card__date">{{ blog['data_added'] }}</span>
+              {% endif %} 
+            </div>
+            {% if (blog['description'] != '..') %} 
+              <span class="news__carousel__cards__card__note">{{ blog['description'] }}</span>
+            {% endif %} 
+          </div>
+        {% endfor %}
+
+      </div>
+      <div>
+          <span class="owl-carousel-button-next news__carousel__arrow news__carousel__arrow_right"></span>
+      </div>
+    </div>
+  </div>
+</section>

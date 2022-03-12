@@ -1,0 +1,72 @@
+{{ header }} 
+<div class="container">
+<div itemscope itemtype="http://schema.org/BreadcrumbList" style="display:none;">
+{% set position = 1 %} {% for breadcrumb in breadcrumbs %} 
+<div itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">
+<link itemprop="item" href="{{ breadcrumb['href'] }}">
+<meta itemprop="name" content="{{ breadcrumb['text'] }}" />
+<meta itemprop="position" content="{{ position }}" />
+</div>
+{% set position = position + 1 %} {% endfor %} 
+</div>
+<ul class="breadcrumb"><li class="br_ellipses" style="display: none;">...</li>
+{% for i,breadcrumb in breadcrumbs %} 
+{% if (i+1<breadcrumbs|length) %}<li><a href="{{ breadcrumb['href'] }}">{{ breadcrumb['text'] }}</a></li>{% else %}{% endif %} 
+{% endfor %} 
+<li><h1 class="inbreadcrumb">{{ heading_title }}</h1></li>
+</ul>
+  <div class="row">{{ column_left }} 
+    {% if (column_left and column_right) %} 
+    {% set class = 'col-sm-6' %} 
+    {% elseif (column_left or column_right) %} 
+    {% set class = 'col-sm-9' %} 
+    {% else %} 
+    {% set class = 'col-sm-12' %} 
+    {% endif %} 
+    <div id="content" class="{{ class }}">{{ content_top }} 
+      {% if (categories) %} 
+      <p>{{ text_index }} 
+        {% for category in categories %} 
+        &nbsp;&nbsp;&nbsp;<a href="index.php?route=product/manufacturer#{{ category['name'] }}">{{ category['name'] }}</a>
+        {% endfor %} 
+      </p>
+      {% for category in categories %} 
+      <h2 id="{{ category['name'] }}">{{ category['name'] }}</h2>
+      {% if (category['manufacturer']) %} 
+	  {% if (revtheme_header_menu_images) %} {% set count_manufs = '6' %} {% else %} {% set count_manufs = '4' %} {% endif %}
+      {% for manufacturers in category['manufacturer']|batch(count_manufs) %}
+      <div class="row">
+        {% for manufacturer in manufacturers %} 
+			{% if (revtheme_header_menu_images) %} 
+				<div class="col-lg-2 col-md-3 col-sm-4 col-xs-6">
+					<div class="product-thumb transition">
+						<div class="image"><a href="{{ manufacturer['href'] }}"><img src="{{ manufacturer['image'] }}" alt="{{ manufacturer['name'] }}" title="{{ manufacturer['name'] }}" class="img-responsive" /></a></div>
+						<div class="caption clearfix">
+							<h4><a style="text-decoration: none" href="{{ manufacturer['href'] }}">{{ manufacturer['name'] }}</a></h4>
+						</div> 
+					</div>
+				</div>
+			{% else %} 
+				<div class="col-sm-3"><a href="{{ manufacturer['href'] }}">{{ manufacturer['name'] }}</a></div>
+			{% endif %} 
+        {% endfor %} 
+      </div>
+      {% endfor %} 
+      {% endif %} 
+      {% endfor %} 
+      {% else %} 
+      <p>{{ text_empty }}</p>
+      <div class="buttons clearfix">
+        <div class="pull-right"><a href="{{ continue }}" class="btn btn-primary">{{ button_continue }}</a></div>
+      </div>
+      {% endif %} 
+      {{ content_bottom }}</div>
+    {{ column_right }}</div>
+</div>
+{% if (revtheme_header_menu_images) %} 
+	<script><!--
+		var div = '.product-thumb .caption > h4';
+		var maxheight = 0;$(div).each(function(){$(this).removeAttr('style');if($(this).height() > maxheight) {maxheight = $(this).height();{{ '}}' }});$(div).height(maxheight);
+	//--></script>
+{% endif %} 
+{{ footer }}

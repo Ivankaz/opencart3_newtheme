@@ -1,0 +1,17 @@
+<section class="about-us">
+  <div class="inner-wrapper">
+    <div class="heading about-us__heading">
+      {% if (heading_title) %} 
+        <span class="heading__tab-name">{{ heading_title }}</span>
+      {% endif %}
+      <span class="heading__line"></span>
+    </div>
+    <article class="about-us__article">
+      <div class="about-us__article__text">
+        {{ html }}
+        <a class="about-us__article__text__link about-us__article__text__link_more" href="/about_us.html">Читать больше</a>
+      </div>
+      <img class="about-us__article__image" src="{{ image }}">
+    </article>
+  </div>
+</section>

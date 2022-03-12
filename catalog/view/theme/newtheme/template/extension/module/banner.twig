@@ -1,0 +1,55 @@
+{% if (bannerName == 'Главный баннер') %}
+  {% for banner in banners %}
+    <section class="main-banner">
+      <img class="main-banner__first-line" src="/catalog/view/theme/newtheme/image/first-line.svg" alt="">
+      <img class="main-banner__second-line" src="/catalog/view/theme/newtheme/image/second-line.svg" alt="">
+      <div class="inner-wrapper">
+        <img class="main-banner__first-gift" src="/catalog/view/theme/newtheme/image/first-gift.svg" alt="">
+        <img class="main-banner__second-gift" src="/catalog/view/theme/newtheme/image/second-gift.svg" alt="">
+        <div class="main-banner__title-area">
+          <h1 class="main-banner__title-area__title">{{ banner['title'] }}</h1>
+        </div>
+        <div class="main-banner__button-area">
+          <a class="button button_big main-banner__button-area__button" href="{{ banner['link'] }}">Смотреть каталог</a>
+        </div>
+        <div class="main-banner__images-area">
+          <img class="main-banner__images-area__image" src="{{ banner['image'] }}" alt="{{ banner['titleText'] }}">
+        </div>
+      </div>
+    </section>
+  {% endfor %}
+{% elseif (bannerName == 'Баннер со скидкой') %}
+  {% for banner in banners %}
+    <section class="sale-banner">
+      <div class="inner-wrapper">
+        <img class="sale-banner__first-line" src="/catalog/view/theme/newtheme/image/sale-banner__first-line.svg" alt="">
+        <img class="sale-banner__second-line" src="/catalog/view/theme/newtheme/image/sale-banner__second-line.svg" alt="">
+        <div class="sale-banner__title-area">
+          <h1 class="sale-banner__title-area__title">{{ banner['title'] }}</h1>
+        </div>
+        <div class="sale-banner__button-area">
+          <a class="button button_big sale-banner__button-area__button" href="{{ banner['link'] }}">Перейти в каталог</a>
+        </div>
+        <div class="sale-banner__images-area">
+          <img class="sale-banner__images-area__image" src="{{ banner['image'] }}" alt="{{ banner['titleText'] }}">
+        </div>
+      </div>
+    </section>
+  {% endfor %}
+{% else %}
+  {% for banner in banners %}
+    <section class="sale-banner">
+      <div class="inner-wrapper">
+        <div class="sale-banner__title-area">
+          <h1 class="sale-banner__title-area__title">{{ banner['title'] }}</h1>
+        </div>
+        <div class="sale-banner__button-area">
+          <a class="button button_big sale-banner__button-area__button" href="{{ banner['link'] }}">Перейти в каталог</a>
+        </div>
+        <div class="sale-banner__images-area">
+          <img class="sale-banner__images-area__image" src="{{ banner['image'] }}" alt="{{ banner['titleText'] }}">
+        </div>
+      </div>
+    </section>
+  {% endfor %}
+{% endif %}

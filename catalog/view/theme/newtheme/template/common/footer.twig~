@@ -1,0 +1,84 @@
+<footer class="footer">
+  <div class="inner-wrapper">
+    <div class="footer__row footer__row__nav">
+      <div class="footer__row__column footer__row__column_logo">
+        <a class="footer__logo" href="/">ideal-textil.ru</a>
+      </div>
+      <div class="footer__row__column footer__row__column_about-us">
+        {% if (revtheme_dop_menus_cf_2) %} 
+        <nav class="footer__row__column__block">
+          <span class="footer__row__column__title">О компании</span>
+          <ul class="footer__row__column__links">
+            {% for revtheme_dop_menu in revtheme_dop_menus_cf_2 %} 
+            <li><a class="footer__row__column__links__link" href="{{ revtheme_dop_menu['href'~config_language_id] }}">{{ revtheme_dop_menu['name'~config_language_id] }}</a></li>
+            {% endfor %}
+          </ul>
+        </nav>
+        {% endif %}
+      </div>
+      <div class="footer__row__column footer__row__column_contacts">
+        <nav class="footer__row__column__block">
+          {% if (header_phone_number != '') %} 
+          <a class="footer__row__column__title" href="tel:{{ header_phone_cod is defined ? header_phone_cod|replace({' ': '', '-': ''}) : '' }}{{ header_phone_number|replace({' ': '', '-': ''}) }}">{% if (header_phone_cod) %}{{ header_phone_cod }}{% endif %} {{ header_phone_number }}</a>
+          {% endif %}
+          {% if (revtheme_dop_menus_cf_3) %} 
+          <ul class="footer__row__column__icons">
+            {% for revtheme_dop_menu in revtheme_dop_menus_cf_3 %} 
+            <li><a class="footer__row__column__icons__icon" href="{{ revtheme_dop_menu['href'~config_language_id] }}"><img src="{{ revtheme_dop_menu['dop_menu_image_cf_3'] }}" alt="{{ revtheme_dop_menu['name'~config_language_id] }}"></a></li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </nav>
+        <nav class="footer__row__column__block">
+          <span class="footer__row__column__title footer__row__column__title_default">Мы в соцсетях:</span>
+          {% if (revtheme_dop_menus_cf_4) %} 
+          <ul class="footer__row__column__icons">
+            {% for revtheme_dop_menu in revtheme_dop_menus_cf_4 %} 
+            <li><a class="footer__row__column__icons__icon" href="{{ revtheme_dop_menu['href'~config_language_id] }}"><img src="{{ revtheme_dop_menu['dop_menu_image_cf_4'] }}" alt="{{ revtheme_dop_menu['name'~config_language_id] }}"></a></li>
+            {% endfor %}
+          </ul>
+          {% endif %}
+        </nav>
+      </div>
+      <div class="footer__row__column footer__row__column_payment-systems">
+        <div class="footer__row__column__block">
+          <span class="footer__row__column__title">Платежные системы</span>
+          <ul class="footer__row__column__icons">
+            {% for revtheme_footer_icon in revtheme_footer_icons %} 
+
+            <li><a class="footer__row__column__icons__icon" href="{% if (revtheme_footer_icon['href'] is defined and revtheme_footer_icon['href'] != '') %}{{ revtheme_footer_icon['href'] }}{% else %}##{% endif %}"><img src="{{ revtheme_footer_icon['image'] }}" alt=""></a></li>
+            {% endfor %}
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="footer__row footer__row_copyright">
+      &copy; 2021 - Интернет-магазин постельного белья
+    </div>
+  </div>
+</footer>
+
+<script src="/catalog/view/theme/newtheme/js/OwlCarousel2/owl.carousel.min.js"></script>
+<script src="/catalog/view/theme/newtheme/js/initOwlCarousel.js"></script>
+<script src="/catalog/view/theme/newtheme/js/showSearchInput.js"></script>
+<script src="/catalog/view/theme/newtheme/js/clickQuantityButtons.js"></script>
+<script src="/catalog/view/theme/newtheme/js/switchTab.js"></script>
+<script src="/catalog/view/javascript/common.js"></script>
+<script>var dataLayer=dataLayer || [];
+(function(w,d,s,l,i,h){if(h=='2tagmanager.google.com'){return}w[l]=w[l]||[];w[l].push({'gtm.start':new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src='//www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);})(window,document,'script','dataLayer','GTM-WK37XKJ',window.location.hostname); 
+//GTM CONTAINER INJECTION ENDS</script>
+<div class="popup-phone-wrapper" data-toggle="tooltip" data-placement="left" title="" data-original-title="Заказать звонок">
+		<span class="scroll-top-inner">
+			<i class="fa fa-phone"></i>
+		</span>
+	</div>
+<div class="scroll-top-wrapper show">
+		<span class="scroll-top-inner">
+			<i class="fa fa-arrow-circle-up"></i>
+		</span>
+	</div>
+<script src="catalog/view/javascript/bootstrap/js/bootstrap.min.js"></script>
+<script src="catalog/view/javascript/revolution/common.js"></script>
+<script src="catalog/view/javascript/revolution/js_change.js"></script>
+</body>
+</html>

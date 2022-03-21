@@ -1315,6 +1315,7 @@ input::-webkit-inner-spin-button {
 }
 .page__content__settings__setting__select {
   padding: 6px;
+  width: 100%;
 }
 .page__content__settings__setting__buttons {
   display: flex;

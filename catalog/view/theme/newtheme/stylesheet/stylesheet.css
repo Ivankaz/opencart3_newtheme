@@ -1479,6 +1479,11 @@ ul.pagination li.active, .page__content__pagination__button_active {
   font-family: Montserrat;
 }
 
+/* Обязательное поле формы, которое не заполнили */
+.form-callback__input_error {
+  border: 1px solid #c10000a6;
+}
+
 /* Текстовая область формы заказа обратного звонка */
 .form-callback__textarea {
   resize: none;

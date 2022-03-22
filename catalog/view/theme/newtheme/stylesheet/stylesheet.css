@@ -1402,6 +1402,95 @@ ul.pagination li.active, .page__content__pagination__button_active {
   color: #fff;
 }
 
+/* Форма заказа обратного звонка */
+.form-callback {
+  display: none;
+}
+
+/* Затемнение фона за формой заказа обратного звонка */
+.form-callback:after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0,0,0,.5);
+  z-index: 99990;
+}
+
+
+/* Контент формы заказа обратного звонка */
+.form-callback__inner {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+  z-index: 99999;
+  width: 300px;
+  background-color: white;
+  padding: 30px;
+  border: 2px solid #35a1bf;
+  border-radius: 4px;
+}
+
+/* Кнопка закрытия формы заказа обратного звонка */
+.form-callback__close-button {
+  display: block;
+  position: absolute;
+  top: 0px;
+  right: 0px;
+  width: 14px;
+  height: 14px;
+  background-color: #35a1bf;
+  text-align: center;
+  padding-left: 6px;
+  padding-bottom: 6px;
+  font-size: 14px;
+  line-height: 14px;
+  border-radius: 0px 0px 0px 30px;
+  color: #fff;
+  font-weight: 400;
+  cursor: pointer;
+}
+
+/* Заголовок формы заказа обратного звонка */
+.form-callback__title {
+  font-weight: bold;
+  text-align: center;
+}
+
+
+/* Поле формы заказа обратного звонка */
+.form-callback__input, .form-callback__textarea {
+  border: 1px solid #cae8ee;
+  padding: 8px;
+  border-radius: 8px;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 12px;
+  line-height: 14px;
+  color: #828282;
+  font-family: Montserrat;
+}
+
+/* Текстовая область формы заказа обратного звонка */
+.form-callback__textarea {
+  resize: none;
+}
+
+
+/* Кнопка отправки формы заказа обратного звонка */
+.form-callback__submit {
+  max-width: none;
+  width: 100%;
+}
+
 @media (max-width: 1100px) {
   .menu {
     box-shadow: unset;

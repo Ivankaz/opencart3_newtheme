@@ -41,6 +41,18 @@
     {% endfor %} 
   </head>
   <body>
+    <!-- Форма заказа обратного звонка -->
+    <div class="form-callback">
+      <form method="POST" action="" class="form-callback__inner">
+        <span class="form-callback__close-button" onclick="hideCallbackForm()">x</span>
+        <span class="form-callback__title">Заказать обратный звонок</span>
+        <input class="form-callback__input" type="text" name="name" placeholder="Имя" required></input>
+        <input class="form-callback__input" type="phone" name="phone" placeholder="Телефон" required></input>
+        <textarea class="form-callback__textarea" name="comment" rows="3" placeholder="Комментарий (необязательно)"></textarea>
+        <button class="button button_small form-callback__submit" type="submit" onclick="sendFormCallback()">Отправить</button>
+      </form>
+    </div>
+
 
     <!-- Меню -->
     <section class="menu">
@@ -66,7 +78,7 @@
             {% if (header_phone_number) %} 
             <a href="tel:{{ header_phone_cod is defined ? header_phone_cod|replace({' ': '', '-': ''}) : '' }}{{ header_phone_number|replace({' ': '', '-': ''}) }}" class="menu__order-callback__phone">{% if (header_phone_cod) %}{{ header_phone_cod }}{% endif %} {{ header_phone_number }}</a>
             {% endif %}
-            <a href="#order-callback-form" class="menu__order-callback__link">Заказать обратный звонок</a>
+            <a href="#" onclick="showCallbackForm()" class="menu__order-callback__link">Заказать обратный звонок</a>
           </div>
         </div>
       </div>

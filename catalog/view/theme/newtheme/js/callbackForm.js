@@ -30,7 +30,8 @@ var sendCallbackForm = function () {
     $.ajax({
         url: '/catalog/controller/common/sendCallbackForm.php',
         method: 'post',
-        dataType: 'json'
+        dataType: 'json',
+        data: $callbackForm.find('form').serializeArray()
     })
     .done(function(data){
         if (data.result) {
